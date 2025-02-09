@@ -1,144 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Home Loan Calculator (₹)</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      padding: 20px;
-      background-color: #f4f4f9;
-    }
-    .calculator {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    label {
-      display: block;
-      margin: 10px 0 5px;
-      color: #555;
-    }
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .result {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #e9f5ff;
-      border-radius: 4px;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Home Loan Assistant</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+        input[type="number"]:focus, input[type="text"]:focus, select:focus {
+            border-color: #6a11cb;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4);
+        }
+        .result {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+            border-radius: 10px;
+            text-align: left;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        .calculator {
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>AI-Powered Home Loan Assistant</h1>
 
-  <div class="calculator">
-    <h1>Advanced Home Loan Calculator (₹)</h1>
-    <label for="propertyPrice">Property Price (₹):</label>
-    <input type="number" id="propertyPrice" placeholder="Enter property price">
+        <!-- Home Loan Calculator -->
+        <div class="calculator">
+            <h2>Home Loan Calculator (₹)</h2>
+            <form id="loanForm">
+                <label for="loanAmount">Loan Amount (₹)</label>
+                <input type="number" id="loanAmount" placeholder="Enter loan amount" required>
 
-    <label for="downPayment">Down Payment (₹):</label>
-    <input type="number" id="downPayment" placeholder="Enter down payment">
+                <label for="propertyValue">Property Value (₹)</label>
+                <input type="number" id="propertyValue" placeholder="Enter property value" required>
 
-    <label for="loanAmount">Loan Amount (₹):</label>
-    <input type="number" id="loanAmount" placeholder="Loan amount (auto-calculated)" readonly>
+                <label for="interestRate">Interest Rate (%)</label>
+                <input type="number" id="interestRate" step="0.01" placeholder="Enter interest rate" required>
 
-    <label for="interestRate">Interest Rate (%):</label>
-    <input type="number" id="interestRate" placeholder="Enter interest rate">
+                <label for="loanTerm">Loan Term (Years)</label>
+                <input type="number" id="loanTerm" placeholder="Enter loan term" required>
 
-    <label for="loanTerm">Loan Term (Years):</label>
-    <input type="number" id="loanTerm" placeholder="Enter loan term">
+                <label for="monthlyIncome">Monthly Income (₹)</label>
+                <input type="number" id="monthlyIncome" placeholder="Enter monthly income" required>
 
-    <label for="propertyTax">Property Tax (₹/year):</label>
-    <input type="number" id="propertyTax" placeholder="Enter property tax">
+                <label for="monthlyObligations">Monthly Obligations (₹)</label>
+                <input type="number" id="monthlyObligations" placeholder="Enter monthly obligations" required>
 
-    <label for="homeInsurance">Home Insurance (₹/year):</label>
-    <input type="number" id="homeInsurance" placeholder="Enter home insurance">
+                <label for="creditScore">Credit Score</label>
+                <input type="number" id="creditScore" placeholder="Enter credit score" required>
 
-    <label for="maintenanceFee">Maintenance Fee (₹/month):</label>
-    <input type="number" id="maintenanceFee" placeholder="Enter maintenance fee">
+                <button type="submit">Calculate Home Loan</button>
+            </form>
 
-    <button onclick="calculateEMI()">Calculate EMI</button>
+            <div class="result" id="loanResult">
+                <!-- Home Loan result will appear here -->
+            </div>
+        </div>
 
-    <div class="result" id="result"></div>
-  </div>
+        <div class="footer">
+            Powered by KingDv Advanced AI | Secure & Reliable
+        </div>
+    </div>
 
-  <script>
-    // Auto-calculate loan amount
-    document.getElementById('propertyPrice').addEventListener('input', updateLoanAmount);
-    document.getElementById('downPayment').addEventListener('input', updateLoanAmount);
+    <script>
+        // Home Loan Calculator
+        document.getElementById('loanForm').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-    function updateLoanAmount() {
-      const propertyPrice = parseFloat(document.getElementById('propertyPrice').value) || 0;
-      const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
-      const loanAmount = propertyPrice - downPayment;
-      document.getElementById('loanAmount').value = loanAmount.toFixed(2);
-    }
+            // Get user inputs
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const propertyValue = parseFloat(document.getElementById('propertyValue').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const loanTerm = parseFloat(document.getElementById('loanTerm').value);
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value);
+            const monthlyObligations = parseFloat(document.getElementById('monthlyObligations').value);
+            const creditScore = parseFloat(document.getElementById('creditScore').value);
 
-    function calculateEMI() {
-      // Get input values
-      const loanAmount = parseFloat(document.getElementById('loanAmount').value);
-      const interestRate = parseFloat(document.getElementById('interestRate').value);
-      const loanTerm = parseFloat(document.getElementById('loanTerm').value);
-      const propertyTax = parseFloat(document.getElementById('propertyTax').value) || 0;
-      const homeInsurance = parseFloat(document.getElementById('homeInsurance').value) || 0;
-      const maintenanceFee = parseFloat(document.getElementById('maintenanceFee').value) || 0;
+            // Calculate LTV (Loan-to-Value Ratio)
+            const ltv = (loanAmount / propertyValue) * 100;
 
-      // Validate inputs
-      if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTerm)) {
-        alert("Please fill in all required fields with valid numbers.");
-        return;
-      }
+            // Calculate FOIR (Fixed Obligation to Income Ratio)
+            const monthlyInterestRate = (interestRate / 100) / 12;
+            const numberOfPayments = loanTerm * 12;
+            const monthlyPayment = (loanAmount * monthlyInterestRate) /
+                (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+            const foir = ((monthlyObligations + monthlyPayment) / monthlyIncome) * 100;
 
-      // Calculate EMI
-      const monthlyInterestRate = (interestRate / 100) / 12;
-      const numberOfPayments = loanTerm * 12;
-      const emi =
-        (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
-        (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+            // AI Decision-Making
+            let eligibility = 'Approved';
+            if (foir > 50 || ltv > 80 || creditScore < 600) {
+                eligibility = 'Not Approved';
+            }
 
-      // Calculate additional monthly costs
-      const monthlyPropertyTax = propertyTax / 12;
-      const monthlyHomeInsurance = homeInsurance / 12;
-      const totalMonthlyPayment = emi + monthlyPropertyTax + monthlyHomeInsurance + maintenanceFee;
-
-      // Display result
-      const resultElement = document.getElementById('result');
-      resultElement.innerHTML = `
-        <strong>Monthly EMI:</strong> ₹${emi.toFixed(2)}<br>
-        <strong>Additional Monthly Costs:</strong><br>
-        - Property Tax: ₹${monthlyPropertyTax.toFixed(2)}<br>
-        - Home Insurance: ₹${monthlyHomeInsurance.toFixed(2)}<br>
-        - Maintenance Fee: ₹${maintenanceFee.toFixed(2)}<br>
-        <strong>Total Monthly Payment:</strong> ₹${totalMonthlyPayment.toFixed(2)}
-      `;
-    }
-  </script>
+            // Display Results
+            const loanResultDiv = document.getElementById('loanResult');
+            loanResultDiv.innerHTML = `
+                <strong>Loan-to-Value Ratio (LTV):</strong> ${ltv.toFixed(2)}%<br>
+                <strong>Fixed Obligation to Income Ratio (FOIR):</strong> ${foir.toFixed(2)}%<br>
+                <strong>Monthly Payment (EMI):</strong> ₹${monthlyPayment.toFixed(2)}<br>
+                <strong>Eligibility:</strong> ${eligibility}<br>
+                <strong>AI Recommendation:</strong> ${eligibility === 'Approved' ? 'Proceed with application.' : 'Consider improving credit score, reducing obligations, or increasing income.'}
+            `;
+        });
+    </script>
 </body>
 </html>
